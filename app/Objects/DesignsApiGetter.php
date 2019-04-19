@@ -18,30 +18,32 @@ class DesignsApiGetter
 
     /**
      * @return array
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getDesigns()
     {
-        $client = new Client();
-        $response = $client->get(self::API_URL);
-//        dd($response);
+        try {
+            $client = new Client();
+            $response = $client->get(self::API_URL);
 
-        if($response->getStatusCode() != 200) {
-            Log::error('Api status code not success');
+            if ($response->getStatusCode() != 200) {
+                Log::error('Api status code not success');
+                return [];
+            }
+
+            $api_results = json_decode($response->getBody()->getContents(), true);
+
+            $designs = [];
+
+            if (!$api_results['content'])
+                return [];
+
+            foreach ($api_results['content'] as $design_raw)
+                $designs[] = new Design($design_raw);
+
+            return $designs;
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
             return [];
         }
-
-        $api_results = json_decode($response->getBody()->getContents(), true);
-
-        $designs = [];
-
-        if(!$api_results['content'])
-            return [];
-
-        foreach ($api_results['content'] as $design_raw) {
-            $designs[] = new Design($design_raw);
-        }
-
-        return $designs;
     }
 }

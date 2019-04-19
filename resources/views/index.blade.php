@@ -16,8 +16,11 @@
                         </thead>
                         <tbody>
                         @foreach($designs as $key => $design)
-                            <tr @if(($key + 1)+($page*$per_page) == 4) class="other-color" @endif>
-                                <th scope="row">{{$key + 1 +($page*$per_page)}}</th>
+                            @php
+                            $current_key = $key + ($page * $per_page) + 1;
+                            @endphp
+                            <tr @if($current_key == 4) class="other-color" @endif>
+                                <th scope="row">{{ $current_key }}</th>
                                 <td>
                                     <img class="img-fluid img-thumbnail" height="200" src="{{$design->getThumbUrl()}}"
                                          alt="Thumbnail">
