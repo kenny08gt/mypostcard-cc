@@ -1,8 +1,36 @@
 @extends('layouts.main')
 @section('content')
-    <div class="starter-template">
-        <h1>My PostCard</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a
-            mostly barebones HTML document.</p>
+    <div class="">
+        <div class="row">
+            <div class="col-12">
+                <h1>My PostCard</h1>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Thumbnail</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($designs as $key => $design)
+                            <tr @if(($key + 1)+($page*$per_page) == 4) class="other-color" @endif>
+                                <th scope="row">{{$key + 1 +($page*$per_page)}}</th>
+                                <td>
+                                    <img class="img-fluid img-thumbnail" height="200" src="{{$design->getThumbUrl()}}"
+                                         alt="Thumbnail">
+                                </td>
+                                <td>{{$design->getTitle()}}</td>
+                                <td><span class="price">{{$design->getPrice()}}</span></td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                @include('components.pagination', ['page' => $page, 'total' => $total, 'per_page' => $per_page])
+            </div>
+        </div>
     </div>
 @endsection

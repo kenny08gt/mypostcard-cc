@@ -1,3 +1,21 @@
 .body-wrapper {
     margin-top: 100px;
+
+    .table {
+        tr {
+            &.other-color {
+                background-color: #afafaf;
+            }
+            td {
+                img {
+                    max-height: 200px;
+                }
+                .price {
+                    &:before {
+                        content: '€';
+                    }
+                }
+            }
+        }
+    }
 }

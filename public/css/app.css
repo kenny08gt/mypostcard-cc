@@ -10666,6 +10666,18 @@ a.text-dark:focus {
   margin-top: 100px;
 }
 
+.body-wrapper .table tr.other-color {
+  background-color: #afafaf;
+}
+
+.body-wrapper .table tr td img {
+  max-height: 200px;
+}
+
+.body-wrapper .table tr td .price:before {
+  content: "\20AC";
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
