@@ -10690,6 +10690,25 @@ a.text-dark:focus {
   content: "\20AC";
 }
 
+.body-wrapper .table .loading-curtain {
+  display: block;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.body-wrapper .table .loading-curtain .fa {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 2rem;
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

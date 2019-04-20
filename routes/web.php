@@ -12,4 +12,5 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('/design/prices', 'HomeController@getPrice');
 Route::get('/pdf', 'HomeController@generatePdf');

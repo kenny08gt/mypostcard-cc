@@ -189,7 +189,14 @@ class Design
     public function getGreetingCardEnvelopePrice()
     {
         $greetcard = ($this->getProducts())['greetcard'];
+
+        if(!$greetcard)
+            return 0;
+
         $envelope = ($greetcard->getProductOptions())['envelope'];
+        if(!$envelope)
+            return 0;
+
         return $envelope->getPrice();
     }
 

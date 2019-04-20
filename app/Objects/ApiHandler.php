@@ -24,10 +24,6 @@ class ApiHandler
     public function fetchDesigns()
     {
         try {
-//            if(Cache::has('designs'))
-//                return Cache::get('designs');
-
-
             $client = new Client();
             $response = $client->get(self::CONTENT_API_URL);
 
@@ -45,11 +41,8 @@ class ApiHandler
 
             foreach ($api_results['content'] as $design_raw) {
                 $design = new Design($design_raw);
-                $design->setProducts($this->fetchProductPrices($design->getId()));
                 $designs[] = $design;
             }
-
-//            Cache::put('designs', $designs,60*24*7);
 
             return $designs;
         } catch (\Exception $exception) {
