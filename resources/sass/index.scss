@@ -2,6 +2,8 @@
     margin-top: 100px;
 
     .table {
+        max-width: 800px;
+        margin: auto;
         tr {
             &.other-color {
                 background-color: #afafaf;

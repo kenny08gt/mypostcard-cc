@@ -41,7 +41,6 @@
 @push('scripts')
     <script>
         $(".thumbnail").on('click', function (event) {
-            console.log('event', event);
             const win = window.open('/pdf?url=' + btoa($(event.target).data('url')), '_blank');
             win.focus();
         })

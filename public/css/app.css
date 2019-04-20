@@ -10666,6 +10666,11 @@ a.text-dark:focus {
   margin-top: 100px;
 }
 
+.body-wrapper .table {
+  max-width: 800px;
+  margin: auto;
+}
+
 .body-wrapper .table tr.other-color {
   background-color: #afafaf;
 }
