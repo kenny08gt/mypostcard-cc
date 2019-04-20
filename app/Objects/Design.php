@@ -8,6 +8,10 @@
 
 namespace App\Objects;
 
+/**
+ * Class Design
+ * @package App\Objects
+ */
 class Design
 {
 

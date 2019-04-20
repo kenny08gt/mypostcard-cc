@@ -10672,6 +10672,13 @@ a.text-dark:focus {
 
 .body-wrapper .table tr td img {
   max-height: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.body-wrapper .table tr td img:hover {
+  -webkit-transform: scale(1.05, 1.05);
+          transform: scale(1.05, 1.05);
 }
 
 .body-wrapper .table tr td .price:before {
