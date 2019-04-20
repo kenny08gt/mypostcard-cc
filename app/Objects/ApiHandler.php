@@ -24,8 +24,8 @@ class ApiHandler
     public function fetchDesigns()
     {
         try {
-            if(Cache::has('designs'))
-                return Cache::get('designs');
+//            if(Cache::has('designs'))
+//                return Cache::get('designs');
 
 
             $client = new Client();
@@ -49,7 +49,7 @@ class ApiHandler
                 $designs[] = $design;
             }
 
-            Cache::put('designs', $designs,60*24*7);
+//            Cache::put('designs', $designs,60*24*7);
 
             return $designs;
         } catch (\Exception $exception) {
