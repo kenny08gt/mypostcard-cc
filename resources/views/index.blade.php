@@ -26,7 +26,27 @@
                                          alt="Thumbnail" data-url="{{$design->getFullUrl()}}">
                                 </td>
                                 <td>{{$design->getTitle()}}</td>
-                                <td><span class="price">{{$design->getPrice()}}</span></td>
+                                <td>
+                                    <table>
+                                        <tbody>
+                                        <tr style="font-size: 0.75rem;">
+                                            <th>Postcard price</th>
+                                            <td><span class="price">{{ $design->getPrice() }}</span></td>
+                                        </tr>
+                                        <tr style="font-size: 0.75rem;">
+                                            <th>Envelope</th>
+                                            <td><span class="price">{{ $design->getGreetingCardEnvelopePrice() }}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total</th>
+                                            <td>
+                                                <span class="price">{{ ($design->getPrice() + $design->getGreetingCardEnvelopePrice()) }}</span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

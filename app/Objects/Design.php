@@ -24,7 +24,23 @@ class Design
     protected $price_foldingcard;
     protected $price_group;
     protected $currencyiso;
+    protected $products;
 
+    /**
+     * @return mixed
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param mixed $products
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
+    }
 
     /**
      * @return mixed
@@ -168,6 +184,13 @@ class Design
     public function setCurrencyiso($currencyiso)
     {
         $this->currencyiso = $currencyiso;
+    }
+
+    public function getGreetingCardEnvelopePrice()
+    {
+        $greetcard = ($this->getProducts())['greetcard'];
+        $envelope = ($greetcard->getProductOptions())['envelope'];
+        return $envelope->getPrice();
     }
 
     /**

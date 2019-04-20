@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Objects\DesignsApiGetter;
+use App\Objects\ApiHandler;
 use App\Objects\PdfMaker;
 use Illuminate\Http\Request;
 use PDF;
@@ -19,10 +19,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-
         $page = $request->get('page');
-        $designs_getter = new DesignsApiGetter();
-        $designs = $designs_getter->getDesigns();
+        $api_handler = new ApiHandler();
+        $designs = $api_handler->fetchDesigns();
         $per_page = 25;
 
         return view('index')
