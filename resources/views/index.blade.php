@@ -3,7 +3,6 @@
     <div class="">
         <div class="row">
             <div class="col-12">
-                <h1>My PostCard</h1>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
