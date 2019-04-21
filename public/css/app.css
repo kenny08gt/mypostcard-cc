@@ -10666,6 +10666,10 @@ a.text-dark:focus {
   margin-top: 100px;
 }
 
+.body-wrapper #productOptionDropdown {
+  text-transform: capitalize;
+}
+
 .body-wrapper .table {
   max-width: 800px;
   margin: auto;
@@ -10688,6 +10692,10 @@ a.text-dark:focus {
 
 .body-wrapper .table tr td .price:before {
   content: "\20AC";
+}
+
+.body-wrapper .table tr td .product-option {
+  text-transform: capitalize;
 }
 
 .body-wrapper .table .loading-curtain {

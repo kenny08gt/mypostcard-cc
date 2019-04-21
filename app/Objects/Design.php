@@ -188,7 +188,7 @@ class Design
 
     public function getGreetingCardEnvelopePrice()
     {
-        return self::getGreetingCardEnvelopePriceFromProducts($this->getProducts());
+        return self::getGreetingCardAddOnPriceFromProducts($this->getProducts(), 'envelope');
     }
 
     /**
@@ -210,19 +210,20 @@ class Design
 
     /**
      * @param $products
+     * @param $add_on
      * @return int
      */
-    public static function getGreetingCardEnvelopePriceFromProducts($products)
+    public static function getGreetingCardAddOnPriceFromProducts($products, $add_on)
     {
         $greetcard = $products['greetcard'];
 
         if(!$greetcard)
             return 0;
 
-        $envelope = ($greetcard->getProductOptions())['envelope'];
-        if(!$envelope)
+        $product_option = ($greetcard->getProductOptions())[$add_on];
+        if(!$product_option)
             return 0;
 
-        return $envelope->getPrice();
+        return $product_option->getPrice();
     }
 }

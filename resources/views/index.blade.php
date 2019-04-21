@@ -4,6 +4,27 @@
         <div class="row">
             <div class="col-12">
                 <div class="table-responsive">
+                    <div class="d-flex align-items-baseline">
+                        <label>Select an add on (product option): </label>
+                        <div class="dropdown ml-2">
+                            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="productOptionDropdown"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Product option
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <button class="dropdown-item" type="button" onclick="changePriceOption('xxl')">XXL
+                                </button>
+                                <button class="dropdown-item" type="button" onclick="changePriceOption('envelope')">
+                                    Envelope
+                                </button>
+                                <button class="dropdown-item" type="button" onclick="changePriceOption('premium')">
+                                    Premium
+                                </button>
+                                <button class="dropdown-item" type="button" onclick="changePriceOption('xl')">XL
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <table class="table">
                         <thead>
                         <tr>
@@ -36,10 +57,11 @@
                                             <tbody>
                                             <tr style="font-size: 0.75rem;">
                                                 <th>Postcard price</th>
-                                                <td><span class="price postcard-price">{{ $design->getPrice() }}</span></td>
+                                                <td><span class="price postcard-price">{{ $design->getPrice() }}</span>
+                                                </td>
                                             </tr>
                                             <tr style="font-size: 0.75rem;">
-                                                <th>Envelope</th>
+                                                <th><span class="product-option">Envelope</span></th>
                                                 <td>
                                                     <span class="price envelope-price">{{ $design->getGreetingCardEnvelopePrice() }}</span>
                                                 </td>
@@ -66,25 +88,44 @@
 @endsection
 @push('scripts')
     <script>
+        let price_option = 'envelope';
+
         $(".thumbnail").on('click', function (event) {
             const win = window.open('/pdf?url=' + btoa($(event.target).data('url')), '_blank');
             win.focus();
         });
         $(function () {
-            $.each($('.design-row'), function(index, item) {
+            updatePrices();
+        });
+
+        function changePriceOption(option) {
+            price_option = option;
+            updatePrices();
+        }
+
+        function updatePrices() {
+            showLoadingCurtain();
+            $('#productOptionDropdown').html(price_option);
+            $.each($('.design-row'), function (index, item) {
                 $.ajax({
                     url: '/design/prices',
                     data: {
                         design_id: $(item).data('design'),
+                        add_on: price_option,
                     },
                     success: function (data) {
                         const postcard_price = $(item).find('.postcard-price').html();
                         $(item).find('.envelope-price').html(data);
+                        $(item).find('.product-option').html(price_option);
                         $(item).find('.total-price').html(parseFloat(data) + parseFloat(postcard_price));
                         $(item).find('.loading-curtain').fadeOut();
                     }
                 })
             });
-        });
+        }
+
+        function showLoadingCurtain() {
+            $('.design-row .loading-curtain').fadeIn();
+        }
     </script>
 @endpush

@@ -49,9 +49,10 @@ class HomeController extends Controller
     public function getPrice(Request $request)
     {
         $id = $request->get('design_id');
+        $add_on = $request->get('add_on');
         $api_handler = new ApiHandler();
         $products = $api_handler->fetchProductPrices($id);
-        $price = Design::getGreetingCardEnvelopePriceFromProducts($products);
+        $price = Design::getGreetingCardAddOnPriceFromProducts($products, $add_on);
 
         return response([$price], 200);
     }
