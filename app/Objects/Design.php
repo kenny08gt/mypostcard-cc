@@ -188,16 +188,7 @@ class Design
 
     public function getGreetingCardEnvelopePrice()
     {
-        $greetcard = ($this->getProducts())['greetcard'];
-
-        if(!$greetcard)
-            return 0;
-
-        $envelope = ($greetcard->getProductOptions())['envelope'];
-        if(!$envelope)
-            return 0;
-
-        return $envelope->getPrice();
+        return self::getGreetingCardEnvelopePriceFromProducts($this->getProducts());
     }
 
     /**
@@ -215,5 +206,23 @@ class Design
         $this->price_foldingcard = $data_json['price_foldingcard'];
         $this->price_group = $data_json['price_group'];
         $this->currencyiso = $data_json['currencyiso'];
+    }
+
+    /**
+     * @param $products
+     * @return int
+     */
+    public static function getGreetingCardEnvelopePriceFromProducts($products)
+    {
+        $greetcard = $products['greetcard'];
+
+        if(!$greetcard)
+            return 0;
+
+        $envelope = ($greetcard->getProductOptions())['envelope'];
+        if(!$envelope)
+            return 0;
+
+        return $envelope->getPrice();
     }
 }

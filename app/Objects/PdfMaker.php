@@ -46,6 +46,6 @@ class PdfMaker
         // Image($file, $x='', $y='', $w=0, $h=0, $type='', $link='', $align='', $resize=false, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox=false, $hidden=false, $fitonpage=false)
 
         $pdf->Image('@' . $img, '', '', 0, 0 ,'', '', '', false, 190);
-        $pdf->Output('example_009.pdf', 'I');
+        $pdf->Output('mypostcard_'.uniqid().'.pdf', 'I');
     }
 }

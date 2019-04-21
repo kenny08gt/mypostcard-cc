@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Objects\ApiHandler;
+use App\Objects\Design;
 use App\Objects\PdfMaker;
 use Illuminate\Http\Request;
 use PDF;
@@ -41,20 +42,17 @@ class HomeController extends Controller
         $pdf->generate($url);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function getPrice(Request $request)
     {
         $id = $request->get('design_id');
         $api_handler = new ApiHandler();
         $products = $api_handler->fetchProductPrices($id);
-        $greetcard = $products['greetcard'];
+        $price = Design::getGreetingCardEnvelopePriceFromProducts($products);
 
-        if(!$greetcard)
-            return 0;
-
-        $envelope = ($greetcard->getProductOptions())['envelope'];
-        if(!$envelope)
-            return 0;
-
-        return response([$envelope->getPrice()], 200);
+        return response([$price], 200);
     }
 }
