@@ -7,7 +7,8 @@
                     <div class="d-flex align-items-baseline">
                         <label>Select an add on (product option): </label>
                         <div class="dropdown ml-2">
-                            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="productOptionDropdown"
+                            <button class="btn btn-sm btn-primary dropdown-toggle" type="button"
+                                    id="productOptionDropdown"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Product option
                             </button>
@@ -89,17 +90,23 @@
 @push('scripts')
     <script>
         let price_option = 'envelope';
+        if (localStorage.getItem("price_option") !== null) {
+            price_option = localStorage.getItem("price_option");
+        }
+
+        // Initial price load
+        $(function () {
+            updatePrices();
+        });
 
         $(".thumbnail").on('click', function (event) {
             const win = window.open('/pdf?url=' + btoa($(event.target).data('url')), '_blank');
             win.focus();
         });
-        $(function () {
-            updatePrices();
-        });
 
         function changePriceOption(option) {
             price_option = option;
+            localStorage.setItem('price_option', price_option);
             updatePrices();
         }
 
